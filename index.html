@@ -1,67 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gratidão Sonora</title>
-<style>
-body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:15px}
-h1{color:#FFD700}
-.botoes{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:20px 0}
-.btn{border:none;padding:12px 16px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:13px}
-.card{background:#1a1a1a;border-radius:15px;padding:15px;margin:15px 0;border:1px solid #333}
-audio{width:100%;margin-top:10px}
-#fileInput{display:none}
-#boxGratidao{display:none;background:#111;border:1px solid #FFD700;border-radius:15px;padding:15px;margin:20px 0}
-textarea{width:95%;height:70px;border-radius:10px;padding:10px}
-</style>
-</head>
-<body>
-<h1>🙏 Gratidão Sonora</h1>
-
-<div class="botoes">
-<button class="btn" style="background:#fff;color:#000" onclick="abrirBanco()">🏦 Banco</button>
-<button class="btn" style="background:#1a1a1a;color:#FFD700;border:1px solid #FFD700" onclick="mostrarGratidao()">✨ Gratidão</button>
-<button class="btn" style="background:#222;color:#fff;border:1px solid #555" onclick="tocarMusica()">▶️ Tocar</button>
-<button class="btn" style="background:linear-gradient(90deg,#FFD700,#FFA500);color:#000" onclick="document.getElementById('fileInput').click()">+ 🎵 Add Música</button>
+<div style="display:flex;justify-content:center;margin:15px 0">
+<button onclick="document.getElementById('fileInputBanco').click()" style="border:none;padding:12px 20px;border-radius:25px;font-weight:bold;cursor:pointer;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000">
++ 🎵 Add Música
+</button>
 </div>
-
-<input type="file" id="fileInput" accept="audio/*" multiple>
-
-<div id="boxGratidao">
-<h3 style="color:#FFD700">O que você agradece hoje?</h3>
-<textarea id="textoGratidao" placeholder="Escreva 3 motivos..."></textarea><br><br>
-<button class="btn" style="background:#FFD700;color:#000" onclick="salvarGratidao()">Salvar</button>
-<p id="listaGratidao"></p>
-</div>
-
-<div id="listaMusica">
-<div class="card"><b>Musica 1</b><audio controls id="player1" src="musica1.mp3"></audio></div>
-<div class="card"><b>Musica 2</b><audio controls src="musica2.mp3"></audio></div>
-<div class="card"><b>Musica 3</b><audio controls src="musica3.mp3"></audio></div>
-<div class="card"><b>Musica 4</b><audio controls src="musica4.mp3"></audio></div>
-<div class="card"><b>Musica 5</b><audio controls src="musica5.mp3"></audio></div>
-<div class="card"><b>Musica 6</b><audio controls src="musica6.mp3"></audio></div>
-</div>
+<input type="file" id="fileInputBanco" accept="audio/*" multiple style="display:none">
+<div id="listaMusicaBanco"></div>
 
 <script>
-function abrirBanco(){ window.open('https://bancogratidaooficial-ops.github.io/BANCO-GRATIDAO/','_blank'); }
-function mostrarGratidao(){ const b=document.getElementById('boxGratidao'); b.style.display=b.style.display==='none'?'block':'none'; }
-function tocarMusica(){ document.getElementById('listaMusica').scrollIntoView({behavior:'smooth'}); document.getElementById('player1').play(); }
-function salvarGratidao(){ let t=document.getElementById('textoGratidao').value; if(!t)return; let l=JSON.parse(localStorage.getItem('gratidoes')||'[]'); l.push(t); localStorage.setItem('gratidoes',JSON.stringify(l)); document.getElementById('textoGratidao').value=''; document.getElementById('listaGratidao').innerHTML=l.map(g=>`• ${g}`).join('<br>'); }
-
-// BOTÃO 4 - ADICIONAR MÚSICA DIRETO
-const input=document.getElementById('fileInput');
-input.addEventListener('change', function(){
-  for(let file of this.files){
-    const url=URL.createObjectURL(file);
-    const div=document.createElement('div');
-    div.className='card';
-    div.innerHTML=`<b>🎵 ${file.name}</b><audio controls src="${url}"></audio>`;
-    document.getElementById('listaMusica').appendChild(div);
-  }
-  alert('Música adicionada com sucesso!');
-});
+const inputBanco = document.getElementById('fileInputBanco');
+const listaBanco = document.getElementById('listaMusicaBanco');
+if(inputBanco){
+  inputBanco.addEventListener('change', function(){
+    for(let file of this.files){
+      const url = URL.createObjectURL(file);
+      const div = document.createElement('div');
+      div.style.cssText = "background:#1a1a1a;border-radius:15px;padding:15px;margin:10px 0;border:1px solid #333;text-align:center";
+      div.innerHTML = `<b>🎵 ${file.name}</b><br><audio controls src="${url}" style="width:100%;margin-top:10px"></audio>`;
+      listaBanco.appendChild(div);
+    }
+    alert('Música adicionada na Refeição e Esperança!');
+  });
+}
 </script>
-</body>
-</html>
