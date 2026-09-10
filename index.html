@@ -1,4 +1,4 @@
-6<div style="display:flex;justify-content:center;margin:15px 0">
+<div style="display:flex;justify-content:center;margin:15px 0">
 <button onclick="document.getElementById('fileInputBanco').click()" style="border:none;padding:12px 20px;border-radius:25px;font-weight:bold;cursor:pointer;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000">
 + 🎵 Add Música
 </button>
@@ -18,12 +18,12 @@ if(inputBanco){
       div.innerHTML = `<b>🎵 ${file.name}</b><br><audio controls src="${url}" style="width:100%;margin-top:10px"></audio>`;
       listaBanco.appendChild(div);
     }
-    alert('Música adicionada na Reflexão, Esperança e motivação!');
-<button onclick="document.getElementById('fileInputBanco').click()" style="width:90%;margin:12px auto;display:block;border:none;padding:14px;border-radius:25px;font-weight:bold;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000">+ 🎵 Add Música</button>
+    alert('Música adicionada na Reflexão <button onclick="document.getElementById('fileInputBanco').click()" style="width:90%;margin:12px auto;display:block;border:none;padding:14px;border-radius:25px;font-weight:bold;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000">+ 🎵 Add Música</button>
 <input type="file" id="fileInputBanco" accept="audio/*" multiple style="display:none">
 <div id="listaMusicaBanco"></div>
 <script>
 document.getElementById('fileInputBanco').addEventListener('change',function(){for(let f of this.files){let u=URL.createObjectURL(f);let d=document.createElement('div');d.style="background:#1a1a1a;padding:10px;margin:8px;border-radius:12px;border:1px solid #FFD700;text-align:center";d.innerHTML=`<b>🎵 ${f.name}</b><audio controls src="${u}" style="width:100%"></audio>`;document.getElementById('listaMusicaBanco').appendChild(d)}});
-</script>  });
+</script>e Esperança!');
+  });
 }
 </script>
