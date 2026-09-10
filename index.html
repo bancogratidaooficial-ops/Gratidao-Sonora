@@ -3,65 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banco Gratidão</title>
+<title>Gratidão Sonora</title>
 <style>
-body{background:#000;color:#fff;font-family:Arial;padding:15px}
-.card-ia{background:#0a1628;border:2px solid #00aaff;border-radius:20px;padding:15px}
-.balao{background:#1e3a5f;border:1px solid #00aaff;border-radius:15px;padding:12px;margin:10px 0;color:#aaddff}
-.input-area{display:flex;gap:8px;margin:15px 0}
-.input-area input{flex:1;padding:12px;border-radius:25px;border:none;background:#111;color:#fff}
-.btn{border:none;padding:14px;border-radius:25px;font-weight:bold;cursor:pointer;width:100%;margin:6px 0}
-.btn-enviar{background:#00ccff;color:#000;width:auto;padding:12px 22px}
-.btn-ia{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000}
-.btn-azul{background:linear-gradient(90deg,#00ccff,#0099ff);color:#000}
-.box-musica{background:#111;border:1px solid #333;border-radius:20px;padding:15px;margin-top:20px}
-.btn-musica{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;margin:8px 0}
-.btn-add{width:90%;margin:12px auto;display:block;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000}
+body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:15px}
+.titulo{color:#FFD700;font-size:28px;font-weight:bold;margin:20px 0}
+.btn-top{border:none;padding:12px 18px;border-radius:25px;font-weight:bold;cursor:pointer;margin:5px;font-size:14px}
+.btn-branco{background:#fff;color:#000}
+.btn-borda{background:#1a1a1a;color:#FFD700;border:1px solid #FFD700}
+.btn-cinza{background:#333;color:#fff}
+.btn-add{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;padding:14px 22px}
+.card{background:#111;border:1px solid #333;border-radius:20px;padding:15px;margin:12px 0}
+audio{width:100%;margin-top:10px}
 </style>
 </head>
 <body>
 
-<div class="card-ia">
-<div class="balao" style="background:#003300;border-color:#00ff66;color:#aaffaa;font-size:13px">Sua energia de gratidão está em 87% - ótimo momento para agradecer!</div>
-<div class="balao">Olá José! Eu sou sua IA da Gratidão 🤖✨ Fui treinada com milhares de mensagens de gratidão. Me diga: pelo que você é grato hoje?</div>
-<div class="input-area">
-<input id="inputGratidao" placeholder="Escreva pelo que é grato...">
-<button class="btn btn-enviar" onclick="document.getElementById('respostaIA').innerHTML='Gratidão registrada: '+document.getElementById('inputGratidao').value+' 🙏'">Enviar</button>
+<div class="titulo">🙏 Gratidão Sonora</div>
+
+<div>
+<!-- BOTÃO BANCO -> VAI PRO BANCO GRATIDÃO -->
+<button class="btn-top btn-branco" onclick="window.location.href='https://bancogratidaooficial-ops.github.io/BANCO-GRATIDAO/'">🏦 Banco</button>
+
+<button class="btn-top btn-borda">✨ Gratidão</button>
+<button class="btn-top btn-cinza">▶️ Tocar</button>
+
+<!-- BOTÃO NOVO BEM-VINDO -> VAI PRO REPOSITÓRIO BEM-VINDO -->
+<button class="btn-top btn-branco" onclick="window.location.href='https://bancogratidaooficial-ops.github.io/bem-vindo/'">👋 Bem-vindo</button>
+
+<br>
+<button class="btn-top btn-add" onclick="document.getElementById('fileInput').click()">+ 🎵 Add Música</button>
+<input type="file" id="fileInput" accept="audio/*" multiple style="display:none">
 </div>
-<button class="btn btn-ia">✨ Gerar Afirmação de Gratidão com IA</button>
-<button class="btn btn-azul">🔍 Analisar Minha Gratidão</button>
-<p id="respostaIA" style="color:#FFD700"></p>
+
+<div id="listaAdd"></div>
+
+<div class="card">
+<b>Musica 1</b>
+<audio controls src="musica1.mp3"></audio>
+</div>
+<div class="card">
+<b>Musica 2</b>
+<audio controls src="musica2.mp3"></audio>
+</div>
+<div class="card">
+<b>Musica 3</b>
+<audio controls src="musica3.mp3"></audio>
+</div>
+<div class="card">
+<b>Musica 4 - Gratidão pela Vida</b>
+<audio controls src="musica4.mp3"></audio>
 </div>
 
-<div class="box-musica">
-<div style="color:#FFD700;font-size:18px;font-weight:bold">🎵 Músicas de Refeição e Esperança</div>
-
-<!-- SEU BOTÃO NOVO AQUI - CORRIGIDO -->
-<button class="btn btn-add" onclick="document.getElementById('fileInputBanco').click()">+ 🎵 Add Música</button>
-<input type="file" id="fileInputBanco" accept="audio/*" multiple style="display:none">
-<div id="listaMusicaBanco"></div>
-
-<button class="btn btn-musica">🙏 1. Gratidão pela Reflexão (+R$100)</button><button onclick="document.getElementById('fileInputBanco').click()" style="width:90%;margin:12px auto;display:block;border:none;padding:14px;border-radius:25px;font-weight:bold;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000">+ 🎵 Add Música</button>
-<input type="file" id="fileInputBanco" accept="audio/*" multiple style="display:none">
-<div id="listaMusicaBanco"></div>
 <script>
-document.getElementById('fileInputBanco').addEventListener('change',function(){for(let f of this.files){let u=URL.createObjectURL(f);let d=document.createElement('div');d.style="background:#1a1a1a;padding:10px;margin:8px;border-radius:12px;border:1px solid #FFD700;text-align:center";d.innerHTML=`<b>🎵 ${f.name}</b><audio controls src="${u}" style="width:100%"></audio>`;document.getElementById('listaMusicaBanco').appendChild(d)}});
-</script>
-<button class="btn btn-musica">💛 2. Gratidão pela Família (+R$150)</button>
-<button class="btn btn-musica">⭐ 3. Gratidão pela Vida (+R$200)</button>
-</div>
-
-<script>
-const inputBanco = document.getElementById('fileInputBanco');
-const listaBanco = document.getElementById('listaMusicaBanco');
-inputBanco.addEventListener('change', function(){
-  for(let file of this.files){
-    const url = URL.createObjectURL(file);
-    const div = document.createElement('div');
-    div.style.cssText="background:#1a1a1a;padding:10px;margin:8px;border-radius:12px;border:1px solid #FFD700;text-align:center";
-    div.innerHTML=`<b>🎵 ${file.name}</b><br><audio controls src="${url}" style="width:100%"></audio>`;
-    listaBanco.appendChild(div);
-  }
+const input = document.getElementById('fileInput');
+const lista = document.getElementById('listaAdd');
+input.addEventListener('change', function(){
+ for(let f of this.files){
+  let url = URL.createObjectURL(f);
+  let div = document.createElement('div');
+  div.className='card';
+  div.innerHTML=`<b>🎵 ${f.name}</b><br><audio controls src="${url}"></audio>`;
+  lista.appendChild(div);
+ }
 });
 </script>
 </body>
