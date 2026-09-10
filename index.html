@@ -5,67 +5,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gratidão Sonora</title>
 <style>
-body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:15px}
-.titulo{color:#FFD700;font-size:28px;font-weight:bold;margin:20px 0}
-.btn-top{border:none;padding:12px 18px;border-radius:25px;font-weight:bold;cursor:pointer;margin:5px;font-size:14px}
+body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:15px;margin:0}
+.titulo{color:#FFD700;font-size:32px;font-weight:bold;margin:15px 0}
+.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:10px 0}
+.btn-top{border:none;padding:12px 18px;border-radius:25px;font-weight:bold;cursor:pointer;font-size:14px}
 .btn-branco{background:#fff;color:#000}
-.btn-borda{background:#1a1a1a;color:#FFD700;border:1px solid #FFD700}
-.btn-cinza{background:#333;color:#fff}
-.btn-add{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;padding:14px 22px}
-.card{background:#111;border:1px solid #333;border-radius:20px;padding:15px;margin:12px 0}
-audio{width:100%;margin-top:10px}
+.btn-borda{background:#111;color:#FFD700;border:1.5px solid #FFD700}
+.btn-cinza{background:#222;color:#fff;border:1px solid #555}
+.btn-add{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;padding:14px 24px;font-size:15px}
+.btn-convidar{background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;padding:12px 20px;margin-top:10px}
+.btn-pix{background:linear-gradient(90deg,#00ccff,#0099ff);color:#000;padding:12px 20px}
+.card{background:#111;border:1px solid #333;border-radius:20px;padding:15px;margin:14px 0}
+.voltar{background:#333;color:#fff;border:none;padding:8px 16px;border-radius:20px;margin-top:10px;cursor:pointer;font-size:12px}
+audio{width:100%;margin-top:10px;border-radius:10px}
+.pix-box{background:#0a1a2a;border:2px solid #00ccff;border-radius:15px;padding:12px;margin:15px 0}
 </style>
 </head>
 <body>
 
 <div class="titulo">🙏 Gratidão Sonora</div>
 
-<div>
-<!-- BOTÃO BANCO -> VAI PRO BANCO GRATIDÃO -->
+<div class="menu">
 <button class="btn-top btn-branco" onclick="window.location.href='https://bancogratidaooficial-ops.github.io/BANCO-GRATIDAO/'">🏦 Banco</button>
+<button class="btn-top btn-branco" onclick="window.location.href='https://bancogratidaooficial-ops.github.io/Bem-vindo-/'">👋 Bem-vindo</button>
+<button class="btn-top btn-borda" onclick="window.location.href='https://bancogratidaooficial-ops.github.io/Gratidao-Sonora/'">✨ Gratidão</button>
+<button class="btn-top btn-cinza" onclick="tocarAleatorio()">▶️ Tocar Aleatório</button>
+</div>
 
-<button class="btn-top btn-borda">✨ Gratidão</button>
-<button class="btn-top btn-cinza">▶️ Tocar</button>
-
-<!-- BOTÃO NOVO BEM-VINDO -> VAI PRO REPOSITÓRIO BEM-VINDO -->
-<button class="btn-top btn-branco" onclick="window.location.href='https://bancogratidaooficial-ops.github.io/bem-vindo/'">👋 Bem-vindo</button>
-
-<br>
+<div class="menu">
 <button class="btn-top btn-add" onclick="document.getElementById('fileInput').click()">+ 🎵 Add Música</button>
 <input type="file" id="fileInput" accept="audio/*" multiple style="display:none">
 </div>
 
+<div class="menu">
+<button class="btn-top btn-convidar" onclick="convidar()">📲 Convidar Membros</button>
+<button class="btn-top btn-pix" onclick="copiarPix()">💰 Apoiar com PIX</button>
+</div>
+
+<div id="pixBox" class="pix-box" style="display:none">
+<b style="color:#00ccff">🙏 Apoie o Gratidão Sonora</b><br>
+PIX: <b id="pixKey">doecomgratidao@gmail.com</b><br>
+<span style="font-size:12px;color:#aaa">Copiado! Ajude a manter as músicas no ar</span>
+</div>
+
 <div id="listaAdd"></div>
 
-<div class="card">
-<b>Musica 1</b>
-<audio controls src="musica1.mp3"></audio>
-</div>
-<div class="card">
-<b>Musica 2</b>
-<audio controls src="musica2.mp3"></audio>
-</div>
-<div class="card">
-<b>Musica 3</b>
-<audio controls src="musica3.mp3"></audio>
-</div>
-<div class="card">
-<b>Musica 4 - Gratidão pela Vida</b>
-<audio controls src="musica4.mp3"></audio>
-</div>
+<div class="card"><b>Musica 1</b><audio id="m1" controls src="musica1.mp3"></audio><br><button class="voltar" onclick="document.getElementById('m1').currentTime=0;document.getElementById('m1').pause()">⏪ Voltar</button></div>
+<div class="card"><b>Musica 2</b><audio id="m2" controls src="musica2.mp3"></audio><br><button class="voltar" onclick="document.getElementById('m2').currentTime=0;document.getElementById('m2').pause()">⏪ Voltar</button></div>
+<div class="card"><b>Musica 3</b><audio id="m3" controls src="musica3.mp3"></audio><br><button class="voltar" onclick="document.getElementById('m3').currentTime=0;document.getElementById('m3').pause()">⏪ Voltar</button></div>
+<div class="card"><b>Musica 4 - Gratidão pela Vida</b><audio id="m4" controls src="musica4.mp3"></audio><br><button class="voltar" onclick="document.getElementById('m4').currentTime=0;document.getElementById('m4').pause()">⏪ Voltar</button></div>
 
 <script>
-const input = document.getElementById('fileInput');
-const lista = document.getElementById('listaAdd');
-input.addEventListener('change', function(){
+// ADD MUSICA
+const input=document.getElementById('fileInput');
+const lista=document.getElementById('listaAdd');
+input.addEventListener('change',function(){
  for(let f of this.files){
-  let url = URL.createObjectURL(f);
-  let div = document.createElement('div');
-  div.className='card';
-  div.innerHTML=`<b>🎵 ${f.name}</b><br><audio controls src="${url}"></audio>`;
-  lista.appendChild(div);
+  let u=URL.createObjectURL(f);
+  let d=document.createElement('div');d.className='card';
+  d.innerHTML=`<b>🎵 ${f.name}</b><br><audio controls src="${u}"></audio><br><button class="voltar" onclick="this.parentElement.remove()">❌ Remover</button>`;
+  lista.appendChild(d);
  }
 });
+
+// CONVIDAR
+function convidar(){
+ const texto="Vem ouvir o Gratidão Sonora comigo 🙏🎵: https://bancogratidaooficial-ops.github.io/Gratidao-Sonora/";
+ if(navigator.share){navigator.share({title:'Gratidão Sonora',text:texto,url:window.location.href})}
+ else{window.open('https://wa.me/?text='+encodeURIComponent(texto),'_blank')}
+}
+
+// PIX MONETIZAÇÃO
+function copiarPix(){
+ const pix=document.getElementById('pixKey').innerText;
+ navigator.clipboard.writeText(pix);
+ document.getElementById('pixBox').style.display='block';
+ alert('PIX copiado: '+pix+' 🙏');
+ setTimeout(()=>{document.getElementById('pixBox').style.display='none'},4000);
+}
+
+// TOCAR ALEATORIO
+function tocarAleatorio(){
+ const audios=[document.getElementById('m1'),document.getElementById('m2'),document.getElementById('m3'),document.getElementById('m4')];
+ let r=audios[Math.floor(Math.random()*audios.length)];
+ r.play(); r.scrollIntoView({behavior:'smooth'});
+}
 </script>
 </body>
 </html>
